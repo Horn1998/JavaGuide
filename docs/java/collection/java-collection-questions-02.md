@@ -290,6 +290,7 @@ static class Segment<K,V> extends ReentrantLock implements Serializable {
 `ConcurrentHashMap` 取消了 `Segment` 分段锁，采用 CAS 和 `synchronized` 来保证并发安全。数据结构跟 HashMap1.8 的结构类似，数组+链表/红黑二叉树。Java 8 在链表长度超过一定阈值（8）时将链表（寻址时间复杂度为 O(N)）转换为红黑树（寻址时间复杂度为 O(log(N))）
 
 `synchronized` 只锁定当前链表或红黑二叉树的首节点，这样只要 hash 不冲突，就不会产生并发，效率又提升 N 倍。
+CAS是乐观锁技术，synchronized是悲观锁。java1.8之后hashmap底层是如何做到即用乐观锁又用悲观锁的呀？
 
 ## Collections 工具类
 
